@@ -27,9 +27,11 @@ metadata:
 spec:
   selector:
     app: maven-helloworld-demo
+  type: NodePort
   ports:
     - protocol: "TCP"
       port: 80
       target: 8080
-  type: NodePort
-  nodePort: 30007
+      nodePort: 30007
+  
+  
