@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maven-helloworld-demo-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: maven-helloworld-demo
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: maven-helloworld-demo
+    spec:
+      containers:
+      - image: techvault2024/maven-helloworld-demo:latest
+        name: maven-helloworld-demo
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maven-helloworld-demo-service
+spec:
+  selector:
+    app: maven-helloworld-demo
+  ports:
+    - protocol: "TCP"
+      port: 80
+      target: 8080
+  type: NodePort
+  nodePort: 30007
